@@ -1,0 +1,33 @@
+---
+# Ex3a Docassemble program.
+variable name: JSname
+use objects: True
+data:
+  - Eleanor
+  - Richard
+  - Jacob
+  - Sofia
+---
+# Displaying with iteration.
+mandatory: True
+question: Display with iteration
+subquestion: |
+  This is a list of family members.
+  
+  Family members with names that end in a vowel are redacted.
+
+  Item|Name
+  ---|---
+  % for JSitem in JSname:
+  % if JSitem[-1].lower() not in set('aeiou'):
+  ${ loop.index + 1 }|${ JSitem }
+  % else:
+  ${loop.index + 1}|**REDACTED**
+  % endif
+  % endfor
+  
+  The above list has **${ JSname.number_as_word() }** items.
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
