@@ -1,0 +1,117 @@
+---
+metadata:
+  title: |
+    <span class="JS_title_style"> Your Family Information
+    </span>
+---
+features:
+  css: JS_Ex3d_Style.css
+---
+objects:
+  - JS_icon: DAStaticFile.using(filename='family_icon.png')
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + JS_icon.url_for() + '" style="height: 60px; margin-left: 50px;">')
+---
+variable name: JSperson_info
+use objects: True
+data:
+  - First Name: Eleanor
+    Last Name: First
+    Age: 50
+    Hobbies: Flying
+    Likes pets?: True
+  - First Name: Richard
+    Last Name: Second
+    Age: 51
+    Hobbies: Cooking
+    Likes pets?: True
+  - First Name: Jacob
+    Last Name: Smedley
+    Age: 24
+    Hobbies: Travelling
+    Likes pets?: True
+  - First Name: Sofia
+    Last Name: Fourth
+    Age: 33
+    Hobbies: Rock Climbing
+    Likes pets?: True
+---
+mandatory: True
+question:  Family information as a data table.
+subquestion: |
+  #### Information Dictionary for each family member.
+  
+  ${ JScolumn_header }
+  ${ JSdashes }
+  %for JSitem in JStable_rows:
+  ${ JSitem }
+  %endfor
+  
+  **This table contains all the information you have confirmed about your family members**
+  
+   ${ JSconfirmed_table }
+  If the **'Number of confirmed answers'** column shows a result of '5' then you have confirmed that all information on record for that family member is true
+attachment:
+  name: Family Information
+  docx template file: JS_Ex3d_Template.docx
+  valid formats:
+    - pdf
+allow emailing: False
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+code: |
+  JScolumn_header = ""
+  
+  for JSitem in JSperson_info[0]:
+    JScolumn_header += JSitem + '|'
+  
+  JScolumn_header = JScolumn_header[:-1]
+---
+code: |
+  JSdashes = "---"
+  
+  for JSitem in range(len(JSperson_info[0])-1):
+    JSdashes += "---|"
+---
+code: |
+  JStable_rows = []
+  
+  for JSitem in JSperson_info:
+    MDrow = ""
+    for JSkey in JSitem:
+      MDrow += str(JSitem[JSkey]) + "|"
+    
+    MDrow = MDrow[:-1]
+    JStable_rows.append(MDrow)
+---
+table: JSconfirmed_table
+rows: JSperson_info
+columns:
+ - Name: |
+    row_item['First Name']
+ - Confirmed answers: |
+    row_item['JSanswers'].true_values()
+ - Number of confirmed answers: |
+      len(row_item['JSanswers'].true_values())
+---
+question: |
+  ${ JSperson_info[i]['First Name'] }, are these details correct?
+subquestion: |
+  <span class="JSquestion_style">
+  *Refer to the table, review your information and then complete the question below*
+  </span>
+  
+  ${ JScolumn_header }
+  ${ JSdashes }
+  %for JSitem in JStable_rows:
+  ${ JSitem }
+  %endfor
+fields:
+ - Tick the following boxes provided that your first name, last name, age, hobbies and preference towards pets (true or false) are correct: JSperson_info[i]['JSanswers']
+   datatype: checkboxes
+   code: JSperson_info[i].values()
+---

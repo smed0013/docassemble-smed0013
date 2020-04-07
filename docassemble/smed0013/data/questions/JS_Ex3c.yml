@@ -1,0 +1,64 @@
+---
+# Ex3c Docassemble program.
+---
+variable name: JSperson_info
+use objects: True
+data:
+  - First Name: Eleanor
+    Last Name: First
+    Age: 50
+    Hobbies: Flying
+    Likes pets?: True
+  - First Name: Richard
+    Last Name: Second
+    Age: 51
+    Hobbies: Cooking
+    Likes pets?: True
+  - First Name: Jacob
+    Last Name: Smedley
+    Age: 24
+    Hobbies: Travelling
+    Likes pets?: True
+  - First Name: Sofia
+    Last Name: Fourth
+    Age: 33
+    Hobbies: Rock Climbing
+    Likes pets?: True
+---
+mandatory: True
+question:  Data table as a table
+subquestion: |
+  #### Information Dictionary for each family member.
+  
+  ${ JScolumn_header }
+  ${ JSdashes }
+  %for JSitem in JStable_rows:
+  ${ JSitem }
+  %endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+code: |
+  JScolumn_header = ""
+  
+  for JSitem in JSperson_info[0]:
+    JScolumn_header += JSitem + '|'
+    
+  JScolumn_header = JScolumn_header[:-1]
+---
+code: |
+  JSdashes = '---'
+  for i in range(len(JSperson_info[0]) - 1):
+    JSdashes += "|---"
+---
+code: |
+  JStable_rows = []
+  
+  for JSitem in JSperson_info:
+    MDrow = ""
+    for JSkey in JSitem:
+      MDrow += str(JSitem[JSkey]) + '|'
+    MDrow = MDrow[:-1]
+    JStable_rows.append(MDrow)
+---

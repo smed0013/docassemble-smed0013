@@ -1,0 +1,33 @@
+.navbar{
+    background-color: rgba(90,64,153,0.80) !important;
+}
+.navbar .nav-item a{
+    color: rgb(255,255,255) !important;
+}
+.navbar .dropdown-menu{
+    background-color: rgba(90,64,153,0.80);
+}
+.navbar .daback{
+    color: rgb(255,255,255);
+}
+.dropdown-item:hover{
+    background-color: rgba(90,64,153,0.80);
+}
+.btn-primary{
+    color: rgb(255,255,255);
+    background-color: rgba(90,64,153,0.80);
+    border-color: rgb(0,0,0);
+}
+.btn-primary:hover{
+    color: rgb(0,0,0);
+    background-color: rgb(167,177,176);
+    border-color: rgb(0,0,0)
+}
+.JSquestion_style{
+    color: rgb(90,64,153);
+    font-size: 1.3em;
+}
+.JS_title_style{
+    color: rgb(0,0,0);
+    font-size: 1em;
+}

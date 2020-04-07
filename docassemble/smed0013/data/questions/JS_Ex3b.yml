@@ -1,0 +1,29 @@
+---
+# Ex3b Docassemble program.
+---
+objects:
+  - JSperson_info: DADict
+---
+variable name: JSperson_info
+use objects: True
+data:
+  First Name: Jacob
+  Last Name: Smedley
+  Age: 24
+  Hobbies: Travelling
+  Likes pets?: True
+---
+mandatory: True
+question: Information Dictionary
+subquestion: |
+  ### Personal Information
+  
+  Category|Value
+  ---|---
+  %for JSkey in JSperson_info:
+  ${ JSkey } | ${JSperson_info[JSkey]}
+  %endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
