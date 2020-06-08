@@ -1,0 +1,161 @@
+---
+# Asks for the name of the participant.
+question: |
+  <span class="P10_question_style">
+  This NDIS Service Agreement is for:
+   </span>
+fields:
+  - Full Name: P10Name
+    default: Joe Bloggs
+  - note: This person will be referred to as the participant in this agreement.
+---
+# Determines if the user is a representative that is running the program on behalf of the partcipant.
+question: |
+  <span class="P10_question_style">
+  Are you filling out this application on behalf of someone else as their Representative?
+   </span>
+subquestion: |
+  **Note:** A Participant’s Representative is someone close to the Participant, such   as a family member or friend or someone who manages the funding for Services     under the Customer’s NDIS Plan. This person is also referred to as the ‘Plan     Nominee’ under the National Disability Insurance Scheme Act 2013.
+fields:
+    - Please select one: P10_Participant_Or_Representative
+      input type: radio
+      choices:
+        - Yes
+        - No
+---
+# This will only display if the user confirms that they are a representative via the previous question.
+question: |
+  <span class="P10_question_style">
+  Please enter the Participant's Representative / Parent / Guardian Name:
+   </span>
+fields:
+  - no label: P10Representative
+    default: Fred Bloggs
+---
+# Asks for basic contact details from the user.
+question: |
+  <span class="P10_question_style">
+  Please provide your contact details below:
+   </span> 
+subquestion: Please ensure these details are correct.
+fields:
+  - Phone Number: P10_phonenumber
+    datatype: integer
+    default: 1234567890
+    required: False
+  - Mobile Number: P10_mobilenumber
+    datatype: integer
+    default: 1234567890
+    required: False
+  - Email Address: P10_emailaddress
+    datatype: email
+    default: fredbloggs@example.com
+    required: False
+  - Home Address: P10_homeaddress
+    default: 26 Example Street, Adelaide, 5000
+    required: False
+---
+# Asks for the name of the participant's case manager.
+question: |
+  <span class="P10_question_style">
+  Please enter the Case Manager's Name:
+   </span>
+fields:
+  - no label: P10CaseManager
+    default: Tommy Atkins
+---
+# Asks for the date that the service agreement between the participant and the RSB will commence.
+question: |
+  <span class="P10_question_style">
+  This NDIS Service Agreement will commence on:
+   </span>
+subquestion: |
+fields:
+  - no label: P10Date
+    datatype: date
+under: |
+   This NDIS Service Agreement will remain in place, until cancelled by the Participant, their Representative or the RSB, following an agreed review of such.
+---
+# The remaining questions in the first section of the interview require the user to agree to various terms described in the service agreement.
+question: |
+  <span class="P10_question_style">
+  Schedule of Services:
+   </span>
+subquestion: |
+  * The Services and their prices are set out in the RSB Service Bookings document which is developed following a request for service. All prices are GST inclusive (if applicable); 
+  
+  * Transport / Travel, Report Writing, Equipment Hire (charged at an agreed rate) are components of Hours of Service claimed;
+  
+  * Please note the prices for Services provided do not include miscellaneous associated costs and fees such as entrance fees, event tickets, meals/drinks etc. and other exclusions set out under the NDIS Price Guide.
+  
+  **Do you accept?**
+yesno: P10ScheduleOfServices
+---
+question: |
+  <span class="P10_question_style">
+  Responsibilites of RSB:
+   </span>
+subquestion: |
+  **The RSB agrees to:**
+  
+  * Consult the Participant on decisions about how services are provided;
+  
+  * Provide Services that that are aligned with the NDIS Plan and at the Participant’s preferred times (wherever possible);
+  
+  * Review the provision of services, including service quality, and if appropriate, to track the Participant’s progress against their goals;
+  
+  * To be respectful of the individual, their family and their home;
+  
+  * Communicate openly and honestly, in a timely manner;
+  
+  * Listen to feedback;
+  
+  * Protect the Participant’s privacy and confidentiality;
+  
+  * Implement cancellations in a manner consistent with the current NDIS Price Guide appropriate for South Australia;
+  
+  * Provide information about the Complaints and Feedback Policy;
+  
+  * Provide services in a manner consistent with relevant laws, including the National Disability Insurance Scheme Act 2013 and Australian Consumer Law;
+  
+  * Keep accurate records of services provided to the Participant;
+  
+  * Provide information in an accessible format and to assist with understanding information if required;
+  
+  * Give a minimum of 24 hours’ notice, where possible, if the RSB has to change a scheduled appointment (except in emergency situations);
+  
+  * Give the Participant 20 working days’ notice if the RSB needs to end the NDIS Service Agreement;
+  
+  * Issue regular invoices and statements of support delivered to the Participant as per the NDIA Terms of Business for Registered Providers.
+  
+  **Do you accept?**
+yesno: P10ResponsibilitiesOfRSB
+---
+question: |
+  <span class="P10_question_style">
+  Responsibilities of Participant:
+   </span>
+subquestion: |
+  **The Participant agrees to:**
+  
+  * Inform the RSB how they wish the services to be delivered to meet their       needs;
+  
+  * Treat employees, consultants and volunteers of the RSB with courtesy and       respect;
+  
+  * Acknowledge that needs may change and to negotiate modifications of care and   service if required;
+  
+  * Talk to the RSB if they have any concerns about the services being provided;
+  
+  * Provide the RSB a minimum of 24 hours’ notice if they cannot make a   scheduled appointment, within reasonable circumstances. If the notice is not   provided by then, the RSB’s Cancellation Policy may apply;
+  
+  * Provide the RSB with 20 business days’ notice if they need to end the NDIS Service Agreement;
+  
+  * Allow safe and reasonable access for RSB employees, consultants and volunteers at the times agreed;
+  
+  * Inform the RSB of any changes to their NDIS Plan or funding shortfalls for agreed provision of services;
+  
+  * Notify the RSB if the NDIS Plan is suspended or replaced by a New Plan or if the Participant stops participating in the NDIS.
+  
+  **Do you accept?**
+yesno: P10ResponsibilitiesOfParticipant
+---

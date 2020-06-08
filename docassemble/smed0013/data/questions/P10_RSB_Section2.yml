@@ -1,0 +1,137 @@
+# Asks the user to clarify how the RSB will claim payment under the agreement. Any combination of the answers is valid but not agreeing with the terms will exit the interview.
+question: |
+  <span class="P10_question_style">
+  Payments:
+   </span> 
+subquestion: |
+  The RSB will seek payment for the provision of services, after the services have been delivered.
+
+  All payments will be as per the current NDIS Price Guide issued by the National Disability Insurance Agency on the first of July each year or as and when, NDIS price changes are published. NDIS Payment terms are 14 days on the provision of invoice.
+
+  RSB will provide invoices and statements to the appropriate party in accordance with the chosen funds management. It may be one or more of the following:
+
+    * If the Participant has chosen to self-manage their funding for NDIS Services provided under the NDIS Service Agreement, the RSB will send the Participant an invoice for the Participant to pay as per the terms;
+
+    * If the Participant’s Plan Nominee self-manages the funding for services provided under this Service Agreement, the RSB will send the Participant’s Plan Nominee an invoice for the Plan Nominee to pay, as per the terms;
+
+    * If the Participant has nominated the NDIA to manage the funding for services provided under this NDIS Service Agreement, the RSB will claim payment from the NDIA via their online portal;
+
+    * If the Participant has nominated a Registered Plan Management Provider to manage the funding for services in the Service Agreement, the RSB will claim payment from the Registered Plan Management Provider.
+    
+    
+    ** Please select one or more payment method(s):**
+fields:
+  - no label: P10payment_method
+    datatype: checkboxes
+    choices:
+      - a self-managed fund
+      - a Plan Nominee self-managed fund
+      - the NDIS service
+      - a Registered Plan Management Provider
+      - Terms not accepted
+    none of the above: False
+  - note: |
+      **You should only choose the 'Terms not accepted' option if you do not agree to provide a payment method.**
+
+---
+# Asks for the date when the RSB can expect to receive payment.
+question: |
+  <span class="P10_question_style">
+      When will payment for the RSB service be provided by?
+   </span> 
+subquestion: |
+ 
+fields:
+  - no label: P10Payment_date
+    datatype: date
+  - note: Payment will need to be within 7 days of the payment date.
+---
+# The remaining questions in the second section of the interview require the user to agree to various terms described in the service agreement.
+question: |
+  <span class="P10_question_style">
+  Changes to the Service Agreement:
+   </span> 
+subquestion: |
+  If changes to the services or their delivery are required, the parties agree to discuss and review the Service Bookings document. The parties agree that any changes to the Service Agreement will be in writing, signed and dated by the parties.
+  
+  **Do you accept?**
+  
+yesno: P10Changes
+---
+question: |
+  <span class="P10_question_style">
+  Refusal to sign the Service Agreement:
+   </span> 
+subquestion: | 
+ Should the Participant state they do not wish to sign this NDIS Service Agreement, the RSB reserves the right to decline provision of services from that time.
+ 
+  **Do you accept?**
+  
+yesno: P10RefusalToSign
+---
+question: |
+  <span class="P10_question_style">
+  Feedback and Complaints:
+   </span> 
+subquestion: | 
+ The RSB is committed to resolving complaints fairly, equitably and as quickly as possible as per the Complaints and Feedback Policy.
+
+ If a Customer is dissatisfied with the support being delivered, then the RSB will listen and try to resolve the complaint. The complaint can be face to face, by phone, fax, letter or email and will be treated with equal importance. 
+
+ The RSB will provide any Services necessary to assist the complainant with making the complaint.
+
+ The complaint will remain confidential and information will only be available to those who are involved in resolving the complaint. Complainants will not be disadvantaged or lose support items as a result of making a complaint.
+
+  **Do you accept?**
+  
+yesno: P10Feedback
+---
+question: |
+  <span class="P10_question_style">
+  Feedback and Complaints continued:
+   </span> 
+subquestion: | 
+ **The Complainant may at any point in the process contact:**
+ 
+ * A Coordinator or Service Manager – in the first instance
+ 
+ * The Executive Manager – if the complaint is about the Coordinator,        their handling of your complaint or more broadly about RSB’s Services
+ 
+ * The Executive Director – if the complaint is about the Executive          Manager, their handling of your complaint or more broadly about the      RSB 
+ 
+ * The Board of Directors – if the complaint is about the Executive          Director, their handling of your complaint
+ 
+ * Or go directly to an external agency
+ 
+ If you are not satisfied with the response you have received or the outcome of your complaint you can contact:
+ 
+ **The NDIS Commission by:**
+
+ * Phoning: 1800 035 544 (free call from landlines) or TTY 133 677          (Interpreters can be arranged)
+ 
+ * National Relay Service and ask for 1800 035 544.
+ 
+ * Completing a complaint contact form at www.ndiscommission.gov.au
+
+  **Do you accept?**
+  
+yesno: P10Contact
+---
+question: |
+  <span class="P10_question_style">
+  Customer Incidents:
+   </span> 
+subquestion: | 
+ Any incident or injury experienced as a result of RSB services or products should be reported to your support coordinator / case manager for follow up. RSB will investigate and report incidents as per the NDIS Commission Quality and Safeguards Framework.
+
+ **While a Customer's right for choice and control in decision-making is to be respected, if an RSB staff member believes the Customer is a risk to themselves or others they have a Duty of Care to contact Emergency Services.**
+ 
+  **Do you accept?**
+  
+yesno: P10Incidents
+---
+event: exit_endpoint
+question: 'Because you have not accepted this section of the service agreement this application cannot continue. Pressing the exit button will take you to the contact section of the RSB website. You should also contact your case manager.'
+buttons:
+  - Exit: exit
+    url: https://rsb.org.au/contact-us

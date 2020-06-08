@@ -1,0 +1,152 @@
+# The main program that controls the execution.
+---
+include:
+  - P10_RSB_Section1.yml
+  - P10_RSB_Section2.yml
+  - P10_RSB_Section3.yml
+---
+metadata:
+  title: |
+     RSB Service Agreement Facilitator
+  description: |
+     A RSB Service Agreement Facilitator
+  Authors:
+     - name: Jacob Smedley
+     - name: Madison Penny
+     - name: Leigh Galliford
+     - name: Melissa Cutts
+     - name: Jake Chilman
+---
+features:
+  css: P10_RSB2_Smed0013.css
+  debug: False
+  hide standard menu: True
+---
+objects:
+  - P10Icon: DAStaticFile.using(filename='P10_RSB2_Icon.png')
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + P10Icon.url_for() + '" style="height: 60px; margin-left: 10px;">')
+---
+mandatory: True
+question: |
+  <span class="P10_question_style">
+  Welcome to The Royal Society for the Blind - NDIS Service Agreement Application
+  </span>
+subquestion: |
+  **Disclaimer:** This application will request information from you and   automatically fill in a NDIS Service Agreement. The completed application will then be automatically emailed to The Royal Society for the Blind, and allow you to download a PDF copy. 
+  
+  When you use this application you will be asked to accept a number of conditions which form part of the service agreement. If you don't accept any of those conditions you will not be able to complete and sign the agreement.
+  
+  Should you disagree with any of the terms, or have any questions, this application will refer you to the contact page of The Royal Society of the Blind so that you can make contact with a Case Manager.
+  
+  **Please note:** Any personal information  this application asks for will be collected in accordance with the RSB's privacy policy.
+  Further information about the privacy policy can be found 
+  [here](https://www.rsb.org.au/privacy-policy).
+  
+  To get started, press **Continue**.
+  To contact us, press **Exit and Contact Us.**
+buttons:
+  - Continue: continue
+  - Exit and Contact Us: exit
+    url: https://rsb.org.au/contact-us
+---
+# This code block controls the execution of the program.
+mandatory: True
+code: |
+  P10Name
+  P10_Participant_Or_Representative
+  if P10_Participant_Or_Representative == 'Yes':
+   P10Representative
+  else:
+    P10_phonenumber
+  P10_mobilenumber
+  P10_emailaddress
+  P10_homeaddress
+  P10CaseManager
+  P10Date
+  if not P10ScheduleOfServices or not P10ResponsibilitiesOfRSB or not     P10ResponsibilitiesOfParticipant:
+    exit_endpoint
+  if P10payment_method['Terms not accepted']:
+    exit_endpoint
+  P10Payment_date
+  if not P10Changes or not P10RefusalToSign or not P10Feedback or not P10Contact or not P10Incidents:
+    exit_endpoint
+  if P10_Participant_Or_Representative == 'Yes':
+    P10_signedname = P10Representative
+  else:
+    P10_signedname = P10Name
+  P10_signature
+---
+mandatory: True
+question: | 
+  <span class="P10_question_style">
+  Thank you for your time
+   </span>
+subquestion: |
+
+  **You have successfully completed and signed the RSB service agreement.**
+ 
+
+  % if email_status == True:
+    A copy has been emailed to your case manager, ${ P10CaseManager }.   If you would like a personal copy of the agreement please click the link below. 
+  % endif
+  
+  Feel free to contact the RSB on the details below if you have any further questions.
+  
+  **RSB’s contact details:**
+  
+  **Phone number:** 1300 944 306 
+  
+  **Email address:** ndis@rsb.org.au
+  
+  **Business Address:** 230 Pirie St, Adelaide, 5000.
+
+
+attachment:
+  name: RSB Service Agreement
+  filename: RSB_Service_Agreement
+  docx template file: Revised_Service_Agreement_with_Jinja_2.docx
+  variable name: service_agreement
+  valid formats:
+    - pdf
+buttons:
+  - I'm done: exit
+    url: https://www.rsb.org.au/
+  - Start again from the beginning: restart
+---
+code: |
+ email_status = send_email(
+ to='smed0013@flinders.edu.au', 
+ template=notification, 
+ attachments=[service_agreement]
+  )
+---
+template: notification
+subject: |
+  Hello ${ P10CaseManager }!
+content: |
+  This is an automated e-mail sent from an interview with a
+  client named ${ P10Name }. Attached you will find their signed service aggreement.
+ 
+  Have a nice day!
+---
+attachment:
+  variable name: service_agreement
+  docx template file: Revised_Service_Agreement_with_Jinja_2.docx
+  valid formats:
+    - pdf
+---
+default screen parts:
+  post: |
+    <div style="display: flex; height: 200px; align-items: flex-end; flex-direction: row-reverse">
+    <div style="margin: 5px"><img src="https://staff.flinders.edu.au/etc.clientlibs/flinders/clientlibs/clientlib-site/resources/images/flinderuni_main_logo_black.png" height="40">
+    </div>
+    <div style="margin: 5px; text-align: center">
+    <cite><small><i>
+    Developed by Flinders University in collaboration with The Royal Society for the Blind
+    </i></small></cite>
+    </div>
+    </div>
+---

@@ -45,7 +45,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
 setup(name='docassemble.smed0013',
       version='0.0.1',
       description=('A docassemble extension.'),
-      long_description='# docassemble.smed0013\r\n\r\nA docassemble extension.\r\n\r\n## Author\r\n\r\nJacob Smedley, smed0013@flinders.edu.au\r\n\r\n',
+      long_description='# docassemble.smed0013\n\nA docassemble extension.\n\n## Author\n\nJacob Smedley, smed0013@flinders.edu.au\n\n',
       long_description_content_type='text/markdown',
       author='Jacob Smedley',
       author_email='smed0013@flinders.edu.au',

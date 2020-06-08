@@ -1,0 +1,10 @@
+---
+# This asks for the user to provide their signature. If the user confirmed that they are a representative then the representative will be addressed. If the user confirmed that they were not a representative then the participant will be addressed.
+question: |
+  <span class="P10_question_style">
+  ${ P10_signedname }, please sign your signature in the box below:
+  </span> 
+subquestion: |
+  **By signing you agree to the terms and conditions of this Service Agreement.**
+signature: P10_signature
+--- 
